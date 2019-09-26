@@ -6,38 +6,42 @@ void hiddenGameBoard();
 void ruleBoard();
 int main() {
 	int bomb = 0;
-	int guess = 5;
 	char choice;
 	int x, y;
 	int points = 0;
-	int realGameBoard[8][8];
 	do {
+		char realGameBoard[8][8] = {' '};
+		int guess = 5;
 		hiddenGameBoard();
 		ruleBoard();
 		srand(time(NULL));
-		for (int goldCount = 0; goldCount != 5; goldCount++) {
-			int gold1 = (rand() % 7) + 1;
-			int gold2 = (rand() % 7) + 1;
-			realGameBoard[gold1][gold2] = 3;
+		int goldCount=0;
+		int bombCount=0;
+		while (goldCount <5) {
+			int gold1 = (rand() % 7);
+			int gold2 = (rand() % 7);
+			realGameBoard[gold1][gold2] = 'G';
+			goldCount++;
 		}
 		cout << endl;
-		for (int bombCount = 0; bombCount != 1; bombCount++) {
-			int bomb1 = (rand() % 7) + 1;
-			int bomb2 = (rand() % 7) + 1;
-			realGameBoard[bomb1][bomb2] = 2;
+		while (bombCount < 1) {
+			int bomb1 = (rand() % 7);
+			int bomb2 = (rand() % 7);
+			realGameBoard[bomb1][bomb2] = 'B';
+			bombCount++;
 		}
 		do {
 			cout << "Enter x coordinate: " << endl;
 			cin >> x;
 			cout << "Enter y coordinates: " << endl;
 			cin >> y;
-			if (realGameBoard[x][y] == 3) {
-				cout << "You found GOLD!! Only " << ++guess << " guesses to go!" << endl << endl;
+			x--;
+			y--;
+			if (realGameBoard[x][y] == 'G') {
+				cout << "You found GOLD!! Only " << ++guess << " guesses to go! You have "<< ++points << " points!"<< endl << endl;
 				realGameBoard[x][y] = 'F';
-				points++;
-
 			}
-			else if (realGameBoard[x][y] == 2) {
+			else if (realGameBoard[x][y] == 'B') {
 
 				cout << "BOMB! Game Over!" << endl << endl;
 				bomb++;
@@ -45,26 +49,32 @@ int main() {
 			else {
 				cout << "Too bad... you have " << --guess << " guesses to go!" << endl << endl;
 			}
-		} while (bomb == 0 && guess !=0&&points!=5);
-		for (int outX = 0; outX < SIZE; outX++) {
-			for (int outY = 0; outY < SIZE; outY++) {
-				if (realGameBoard[outX][outY] == 3) {
-					realGameBoard[outX][outY] ='G';
-				}
-				else if (realGameBoard[outX][outY] == 2) {
-					realGameBoard[outX][outY] = 'B';
-				}
-				else {
-					realGameBoard[outX][outY] = ' ';
-					--guess;
-				}
+			if (guess == 0) {
+				cout << "You earned " << points << " points" << endl;
 			}
-		}
+		} while (bomb == 0 && guess !=0);
+		//for (int outX = 0; outX < SIZE; outX++) {
+		//	for (int outY = 0; outY < SIZE; outY++) {
+		//		if (realGameBoard[outX][outY] == 'G') {
+		//			realGameBoard[outX][outY] ='G';
+		//		}
+		//		else if (realGameBoard[outX][outY] == 'F') {
+		//			realGameBoard[outX][outY] = 'F';
+		//		}
+		//		else if (realGameBoard[outX][outY] == 'B') {
+		//			realGameBoard[outX][outY] = 'B';
+		//		}
+		//		else {
+		//			realGameBoard[outX][outY] = ' ';
+		//			--guess;
+		//		}
+		//	}
+		//}
 		cout << "You earned " << points << " points" << endl;
 		cout << "Better Luck Next Time" << endl;
 		cout << "Here's your board" << endl;
-		cout << "   1  2  3  4  5  6  7  8" << endl;
-		cout << "  _ _ _ _ _ _ _ _ _ _ _ _" << endl;
+		cout << "    1 2 3 4 5 6 7 8" << endl;
+		cout << "  _ _ _ _ _ _ _ _ _" << endl;
 		cout << "1 | " << realGameBoard[0][0] << " " << realGameBoard[1][0] << " " << realGameBoard[2][0] << " " << realGameBoard[3][0] << " " << realGameBoard[4][0] << " " << realGameBoard[5][0] << " " << realGameBoard[6][0] << " " << realGameBoard[7][0] << endl;
 		cout << "2 | " << realGameBoard[0][1] << " " << realGameBoard[1][1] << " " << realGameBoard[2][1] << " " << realGameBoard[3][1] << " " << realGameBoard[4][1] << " " << realGameBoard[5][1] << " " << realGameBoard[6][1] << " " << realGameBoard[7][1] << endl;
 		cout << "3 | " << realGameBoard[0][2] << " " << realGameBoard[1][2] << " " << realGameBoard[2][2] << " " << realGameBoard[3][2] << " " << realGameBoard[4][2] << " " << realGameBoard[5][2] << " " << realGameBoard[6][2] << " " << realGameBoard[7][2] << endl;
