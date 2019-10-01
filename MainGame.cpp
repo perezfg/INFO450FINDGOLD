@@ -53,23 +53,6 @@ int main() {
 				cout << "You earned " << points << " points" << endl;
 			}
 		} while (bomb == 0 && guess !=0);
-		//for (int outX = 0; outX < SIZE; outX++) {
-		//	for (int outY = 0; outY < SIZE; outY++) {
-		//		if (realGameBoard[outX][outY] == 'G') {
-		//			realGameBoard[outX][outY] ='G';
-		//		}
-		//		else if (realGameBoard[outX][outY] == 'F') {
-		//			realGameBoard[outX][outY] = 'F';
-		//		}
-		//		else if (realGameBoard[outX][outY] == 'B') {
-		//			realGameBoard[outX][outY] = 'B';
-		//		}
-		//		else {
-		//			realGameBoard[outX][outY] = ' ';
-		//			--guess;
-		//		}
-		//	}
-		//}
 		cout << "You earned " << points << " points" << endl;
 		cout << "Better Luck Next Time" << endl;
 		cout << "Here's your board" << endl;
